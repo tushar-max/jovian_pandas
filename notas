@@ -1,0 +1,14 @@
+Personal notes
+Leandro D. Medus
+
+Course:  Data Analysis with Python: Zero to Pandas
+https://jovian.ml/learn/data-analysis-with-python-zero-to-pandas
+
+Forum of the course
+https://jovian.ml/forum/c/course-discussions/data-analysis-with-python-zero-to-pandas/44
+
+
+
+
+algunas notas útiles:
+    print('The given number {} is even.'.format(a_number))
