@@ -12,3 +12,38 @@ https://jovian.ml/forum/c/course-discussions/data-analysis-with-python-zero-to-p
 
 algunas notas útiles:
     print('The given number {} is even.'.format(a_number))
+
+
+%%time
+
+
+# Looping over a dictionary
+person = {
+    'name': 'John Doe',
+    'sex': 'Male',
+    'age': 32,
+    'married': True
+}
+
+for key in person:
+    print("Key:", key, ",", "Value:", person[key])
+
+
+for value in person.values():
+    print(value)
+
+for key_value_pair in person.items():
+    print(key_value_pair)
+
+for key, value in person.items():
+    print("Key:", key, ",", "Value:", value)
+
+
+a_list = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+
+for i in range(len(a_list)):
+    print('The value at position {} is {}.'.format(i, a_list[i]))
+
+expresión equivalente
+for i, val in enumerate(a_list):
+    print('The value at position {} is {}.'.format(i, val))
