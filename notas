@@ -7,8 +7,9 @@ https://jovian.ml/learn/data-analysis-with-python-zero-to-pandas
 Forum of the course
 https://jovian.ml/forum/c/course-discussions/data-analysis-with-python-zero-to-pandas/44
 
+jovian.commit(user='leosf', filename='python-functions-and-scope.ipynb', project='pandas_w1_ntk4_python-functions-and-scope')
 
-
+jovian.commit(user='leosf', filename='fileName.ipynb', project='projectName')
 
 algunas notas útiles:
     print('The given number {} is even.'.format(a_number))
@@ -47,3 +48,132 @@ for i in range(len(a_list)):
 expresión equivalente
 for i, val in enumerate(a_list):
     print('The value at position {} is {}.'.format(i, val))
+
+
+
+.strip
+to remove spacesfrom begining and end of a file 
+
+.capitalize
+
+"{} asdas {}".format(var, var2)
+
+
+
+list
+.append
+.insert(pos, 'asdsd')
+.remove('banana')
+.pop(4) remove element in that index
+
+
+
+the difference between tupples and list is that tupples can not be modiffied once created, they are inmutable
+
+
+
+why to use tupples insted of list ??
+when you want to be sure about modifications not allowed
+
+
+hwn the key doesn't exist 
+
+dictionary.get(key, 'unknown')
+where the second string is the return value to avoid error
+
+
+dict.pop(key)
+to eliminate a key in a dictionary
+
+try:
+    a = 1/0
+except ZeroDivisionError:
+    pass
+	
+def loan_emi(amount, duration, rate, down_payment=0):
+	"""Calculates the equal montly installment (EMI) for a loan.
+    
+    Arguments:
+        amount - Total amount to be spent (loan + down payment)
+        duration - Duration of the loan (in months)
+        rate - Rate of interest (monthly)
+        down_payment (optional) - Optional intial payment (deducted from amount)
+    """
+
+Functions with an arbitrary number of arguments using (`*args` and `**kwargs`)
+
+
+Files
+---------
+import os
+os.getcwd()
+os.listdir('.') # relative path
+os.makedirs('./data', exist_ok=True)
+
+
+import urllib.request
+url1 = 'https://hub.jovian.ml/wp-content/uploads/2020/08/loans1.txt'
+urllib.request.urlretrieve(url1, './data/loans1.txt')
+
+
+file1 = open('./data/loans1.txt', mode='r')
+file1_contents = file1.read()
+file1.close()
+
+read() lee el archivo completo  lo almacena en un único string
+
+with open('./data/loans2.txt') as file2:
+    file2_contents = file2.read()
+    print(file2_contents)
+	
+Reading a file line by line
+with open('./data/loans3.txt', 'r') as file3:
+    file3_lines = file3.readlines()
+
+readlines() toma linea a linea y genera una lista  con string y endlines
+
+
+def parse_headers(header_line):
+    return header_line.strip().split(',')
+
+
+def parse_values(data_line):
+    values = []
+    for item in data_line.strip().split(','):
+        if item == '':
+            values.append(0.0)
+        else:
+            values.append(float(item))
+    return values
+	
+for item in zip([1,2,3], ['a', 'b', 'c']):
+    print(item)
+(1, 'a')
+(2, 'b')
+(3, 'c')
+
+
+def create_item_dict(values, headers):
+    result = {}
+    for value, header in zip(values, headers):
+        result[header] = value
+    return result
+
+	
+def read_csv(path):
+    result = []
+    # Open the file in read mode
+    with open(path, 'r') as f:
+        # Get a list of lines
+        lines = f.readlines()
+        # Parse the header
+        headers = parse_headers(lines[0])
+        # Loop over the remaining lines
+        for data_line in lines[1:]:
+            # Parse the values
+            values = parse_values(data_line)
+            # Create a dictionary using values & headers
+            item_dict = create_item_dict(values, headers)
+            # Add the dictionary to the result
+            result.append(item_dict)
+    return result
