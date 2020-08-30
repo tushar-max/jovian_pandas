@@ -152,6 +152,17 @@ for item in zip([1,2,3], ['a', 'b', 'c']):
 (2, 'b')
 (3, 'c')
 
+def parse_headers(header_line):
+    return header_line.strip().split(',')
+
+def parse_values(data_line):
+    values = []
+    for item in data_line.strip().split(','):
+        if item == '':
+            values.append(0.0)
+        else:
+            values.append(float(item))
+    return values
 
 def create_item_dict(values, headers):
     result = {}
@@ -159,7 +170,6 @@ def create_item_dict(values, headers):
         result[header] = value
     return result
 
-	
 def read_csv(path):
     result = []
     # Open the file in read mode
@@ -177,3 +187,83 @@ def read_csv(path):
             # Add the dictionary to the result
             result.append(item_dict)
     return result
+	
+Writing to files
+	
+with open('./data/emis2.txt', 'w') as f:
+    for loan in loans2:
+        f.write('{},{},{},{},{}\n'.format(
+            loan['amount'], 
+            loan['duration'], 
+            loan['rate'], 
+            loan['down_payment'], 
+            loan['emi']))
+			
+			
+Let's define a generic function write_csv which takes a list of dictionaries and writes it to a file in CSV format. We will also include the column headers in the first line.
+
+def write_csv(items, path):
+    # Open the file in write mode
+    with open(path, 'w') as f:
+        # Return if there's nothing to write
+        if len(items) == 0:
+            return
+        
+        # Write the headers in the first line
+        headers = list(items[0].keys())
+        f.write(','.join(headers) + '\n')
+        
+        # Write one item per line
+        for item in items:
+            values = []
+            for header in headers:
+                values.append(str(item.get(header, "")))
+            f.write(','.join(values) + "\n")
+			
+			
+---------------------------------------------------------------------------------------------------	
+numpy
+
+np.array([1,2,3])
+np.dot(a,b) = (a*b).sum()
+
+a.shape
+a.dtype
+
+np.matmul(a,b) = a@b 
+matrix multiplication
+
+climate_results = np.concatenate((climate_data, yields.reshape(10000, 1)), axis=1)
+np.reshape(3,1)
+
+saving some results 
+
+np.savetxt('climate_results.txt', 
+           climate_results, 
+           fmt='%.2f', 
+           header='temperature,rainfall,humidity,yeild_apples', 
+           comments='')
+
+--------
+Arithmetic operations and broadcasting
+
+Broadcasting only works if one of the arrays can be replicated to exactly match the shape of the other array.
+
+(arr1 == arr2).sum()
+A common use case for this is to count the number of equal elements in two arrays using the sum method. Remember that True evalues to 1 and False evaluates to 0 when booleans are used in arithmetic operations.
+
+np.zeros((3, 2))
+np.ones([2, 2, 3])
+np.eye(3)
+np.random.rand(5) 	-- 1x5
+np.random.randn(2, 3) # rand vs. randn - what's the difference?
+# Fixed value
+np.full([2, 3], 42)
+
+
+----- vectores espaciados 
+# Range with start, end and step
+np.arange(10, 90, 3)
+
+# Equally spaced numbers in a range
+np.linspace(3, 27, 9)
