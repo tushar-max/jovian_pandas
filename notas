@@ -234,6 +234,10 @@ np.matmul(a,b) = a@b
 matrix multiplication
 
 climate_results = np.concatenate((climate_data, yields.reshape(10000, 1)), axis=1)
+
+# acá el axis indica la dirección y se corresponde con el índice de la matriz. Por ello axis=0 representa el desplazamiento por las filas, por lo tanto hace referencia a la "columna", es decir si axis=0, la concetenación será hacia abajo. Este es el caso en que quiero concatenar vectores filas. 
+# para el ejemplo que se describe, se concatenan vectores columna, y como yields no es escritamente un vector columna sino que su shape es (1000,) se lo redimensiona, y luego se selecciona acis=1 que indica que es el segundo índice de matriz, es decir el índice que describe las columnas, por lo tanto la concatenación será hacia la derecha o en dirección de "las filas".
+
 np.reshape(3,1)
 
 saving some results 
